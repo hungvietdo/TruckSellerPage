@@ -8,7 +8,9 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://ec2-35-172-116-94.compute-1.amazonaws.com/test');
 
 var bears = require('./models/bear');
-var routes = require('./models/searchResult');
+var searchresult = require('./models/searchResult');
+var homepage = require('./routes/index');
+
 
 var app = express();
 
@@ -27,8 +29,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //to define data
 //app.locals.appdata = require('./data.json');
-app.use('/', routes);
+app.use('/', searchresult);
 app.use('/', bears);
+app.use('/', homepage);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

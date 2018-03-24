@@ -24,7 +24,6 @@ db.once('open', function() {
             var str = JSON.stringify(searchresults);
             var result = JSON.parse(str);
             res.json(result);
-
         });  
         };
     });

@@ -24,10 +24,10 @@ var Schema = mongoose.Schema;
       truck.find({ }).limit(2)
       .exec(function(err, searchresults) {
         var str = JSON.stringify(searchresults);
-        var restored = JSON.parse(str);
+        var result = JSON.parse(str);
         res.render('results', { 
             title: 'Truck Online - Result',
-            input: restored,
+            input: result,
             rawdata: searchresults,
             checkinput: true
           });

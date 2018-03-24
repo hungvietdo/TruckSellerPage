@@ -10,7 +10,6 @@ var TruckSchema = mongoose.Schema({
 });
 
 var Schema = mongoose.Schema;
-//===================== express website =================================
 
   /* GET home page. */
   router.get('/', function(req, res, next) {
@@ -19,33 +18,7 @@ var Schema = mongoose.Schema;
       page: 'Home'
         });
   });
-  /* GET to search result. */
-  router.get('/results', function(req, res, next) {
-    if (req.query.keyword == "") { 
-      console.log("The search input is empty.");
-      res.render('results', { 
-        title: 'Truck Online - Result',
-        input: '',
-        checkinput: false,
-        rawdata: '',
-      });
-    } else {
-      var truck = mongoose.model('vehicle', TruckSchema,'vehicle');
-      truck.find({ }).limit(1)
-      .exec(function(err, searchresults) {
-        var str = JSON.stringify(searchresults);
-        var restored = JSON.parse(str);
-    
-        res.render('results', { 
-            title: 'Truck Online - Result',
-            input: restored,
-            rawdata: searchresults,
-            checkinput: true
-
-          });
-      });  
-    };
-  });
+  
 
 //populate data
 
