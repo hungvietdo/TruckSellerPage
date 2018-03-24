@@ -1,0 +1,57 @@
+    <!-- Search -->
+    <header>
+      <br><br><br><br>
+        
+    
+        <div class="container">
+            <div class="row">
+
+                <% if (!checkinput) { %>
+                      <div class="col-lg-8 col-lg-offset-2">
+                          <h4>Please have a keyword.</h4>
+                      </div>
+                <% } else { %> 
+
+                      <% if (rawdata.length==0) { %> 
+
+                        <div class="col-lg-8 col-lg-offset-2">
+                          <h4>No result.</h4>
+                      </div>
+
+                      <% } else { %> 
+
+              
+                            <% for(var i=0; i<input.length; i++) {%>
+                            
+
+                          
+                                  <div class="col-lg-9 col-lg-offset-1">
+
+                                            <hr> 
+                                      <div class="col-lg-4 col-lg-offset-2">
+                                        <a href="">
+                                        <a href="/results/<%= input[i]._id %>/<%= input[i].images %>">
+                                          <img src="/images/<%- input[i]._id%>/<%- input[i].images[1]%> " class="img-thumbnail " alt="Cinque Terre" width="150" height="100"> 
+                                        </a>
+
+                                      </div>
+
+                                      <div class="col-lg-6">
+                                          <h3><%- input[i].Model%></h3> 
+                                          <b>Make: </b><%- input[i].Make%>  <br>
+                                          <b>Price: </b><%- input[i].Price%>  <br>
+                                      </div>
+
+                                  </div>
+                            
+                          <% } %>
+
+                      <% } %> 
+
+                  <% } %> 
+              
+            </div>
+        </div>
+        </div>
+    <br><br><br><br><br><br><br>
+    </header>

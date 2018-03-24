@@ -1,0 +1,70 @@
+    <!-- Search -->
+    
+    <br><br><br><br>
+    
+
+    <header>
+      
+        
+
+
+
+
+        <div class="container">
+            <div class="row">
+
+               <div class="col-lg-12 col-lg-offset-2">
+                          <h4>This is the detail of the <%= data[0].Model %> </h4>
+
+                            <br><br>
+                                
+                                <div class="col-lg-4" >
+                               
+                                <b> Summary </b><br>    
+
+                                Price: <%= data[0].Price %> <br>
+                                Year: <%= data[0].Year %> <br>
+                                Make: <%= data[0].Make %> <br>
+                                Model: <%= data[0].Model %> <br>
+                                Description: <%= data[0].Description %> <br>
+                                Seller: <%= data[0].sellerid.username %> <br>
+
+                                Fuel type: <%= data[0].Metadata['fuel type'] %> <br>
+                                Mileage: <%= data[0].Metadata['mileage'] %> <br>
+                                
+                                </div>
+
+                                <div class="col-lg-4" >
+
+                                <b> Metadata </b><br>    
+
+                                Color: <%= data[0].Metadata['color'] %> <br>
+                                Transmission: <%= data[0].Metadata['transmission'] %> <br>
+                                Body type: <%= data[0].Metadata['body type'] %> <br>
+                                Engine: <%= data[0].Metadata['Engine'] %> <br>
+
+
+                                </div>
+                                
+                                
+                                <% include showimage.ejs %>
+
+                                <br>
+                                <p>
+                                Click the link to:
+                                <a href="mailto:<%= data[0].sellerid.contact.email %>?Subject=Get more information about the <%= data[0].Model %>" target="_top">contact the Seller</a>
+                                <br>
+                                Phone number: <%= data[0].sellerid.contact.phone %>
+                                </p>
+                                
+
+                        
+                </div>      
+
+
+              
+            </div>
+        
+        </div>
+    <br><br><br><br><br><br><br>
+    </header>
