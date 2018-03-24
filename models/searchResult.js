@@ -3,13 +3,18 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 var _ = require('underscore');
+var mongoosePaginate = require('mongoose-paginate');
+
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 console.log("we are connected to mongo");
 var TruckSchema = mongoose.Schema({
     name: String
 });
-var Schema = mongoose.Schema;
+TruckSchema.plugin(mongoosePaginate);
+
+
   /* GET to search result. */
   router.get('/results', function(req, res, next) {
     if (req.query.keyword == "") { 
@@ -23,13 +28,18 @@ var Schema = mongoose.Schema;
     } else {
       //query = '{ "MEDIA": { $exists: true, $not: {$size: 0} } }'
       var trucks = mongoose.model('vehicles', TruckSchema, 'vehicles');
-      trucks.find({}).limit(20).exec(function(err, searchresults) {
+
+      trucks.paginate({"MEDIA": { $gt: [] }}, { page: 1, limit: 10 }).then(function(result) {
         res.render('results', { 
           title: 'Truck Online - Result',
-          data: formatResult(searchresults),
+          data: formatResult(result.docs),
           checkinput: true
         });
       });
+
+      // trucks.find({}).limit(20).exec(function(err, searchresults) {
+        
+      // });
     };
   });
 });
