@@ -18,13 +18,15 @@ db.once('open', function() {
         { 
             console.log("The search input is empty.");
         } else {
-        var truck = mongoose.model('vehicle', TruckSchema,'vehicle');
-        truck.find({ }).limit(1)
-        .exec(function(err, searchresults) {
-            var str = JSON.stringify(searchresults);
-            var result = JSON.parse(str);
-            res.json(result);
-        });  
+            var trucks = mongoose.model('vehicle', TruckSchema,'vehicles');
+            var aaa = '"MEDIA": { $gt: [] } '
+
+            trucks.find({"MEDIA": { $gt: [] }}).limit(2)
+            .exec(function(err, searchresults) {
+                var str = JSON.stringify(searchresults);
+                var result = JSON.parse(str);
+                res.json(result);
+            });  
         };
     });
 });

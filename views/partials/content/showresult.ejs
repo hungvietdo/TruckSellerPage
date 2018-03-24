@@ -12,32 +12,40 @@
                       </div>
                 <% } else { %> 
 
-                      <% if (rawdata.length==0) { %> 
+                      <% if (data.length==0) { %> 
 
                         <div class="col-lg-8 col-lg-offset-2">
                           <h4>No result.</h4>
                       </div>
 
                       <% } else { %> 
-                            <% for(var i=0; i<input.length; i++) {%>
+                            <% for(var i=0; i<data.length; i++) {
+                                undefined
+                                if (typeof data[i].thumbnail == 'undefined') {
+                                    thumbnail = "https://cdn1.commercialtrucktrader.com/vlatest/media/image-coming-soon-512.png"
+                                } else {
+                                    thumbnail = "https://cdn1.commercialtrucktrader.com/vLatest/media/" + data[i].thumbnail;
+                                }
+                                %>
                                   <div class="col-lg-9 col-lg-offset-1">
 
                                             <hr> 
                                       <div class="col-lg-4 col-lg-offset-2">
                                         <a href="">
-                                        <a href="/results/<%= input[i]._id %>/<%= input[i].images %>">
-                                          <img src="/images/<%- input[i]._id%>/<%- input[i].images[1]%> " class="img-thumbnail " alt="Cinque Terre" width="150" height="100"> 
+                                        <a href="/results/<%= data[i]._id %>/">
+                                          <img src=<%- thumbnail%> class="img-thumbnail " alt="Cinque Terre" width="150" height="100"> 
                                         </a>
 
                                       </div>
 
                                       <div class="col-lg-6">
-                                          <h3><%- input[i].Model%></h3> 
-                                          <b>Make: </b><%- input[i].Make%>  <br>
-                                          <b>Price: </b><%- input[i].Price%>  <br>
+                                          <h3><%- data[i].make%> <%- data[i].model%> </h3> 
+                                          <p><b>ID:</b>  <%- data[i].adId%></p>
+                                          <p></p><b>Price:</b> <%- data[i].price%></p>
+                                          <p></p><b>Year:</b> <%- data[i].year%></p>
+                                          
                                       </div>
-
-                                  </div>
+                                </div>
                             
                           <% } %>
 
