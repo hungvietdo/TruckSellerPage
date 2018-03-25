@@ -12,6 +12,7 @@ var searchresult = require('./models/searchResult');
 var homepage = require('./routes/index');
 var detail = require('./models/detail');
 var sendlead = require('./models/sendlead');
+var leadsinfo = require('./models/leadsinfo');
 
 
 var app = express();
@@ -36,8 +37,7 @@ app.use('/', bears);
 app.use('/', homepage);
 app.use('/', detail);
 app.use('/', sendlead);
-
-
+app.use('/', leadsinfo);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
