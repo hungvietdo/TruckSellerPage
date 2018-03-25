@@ -48,3 +48,16 @@ footer {
 .navbar-custom .icon-bar {
     background-color:#33aa33;
 }
+.detail-header {
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    ustify-content: center;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

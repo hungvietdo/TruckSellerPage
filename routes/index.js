@@ -5,11 +5,6 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 console.log("we are connected to mongo");
-var TruckSchema = mongoose.Schema({
-    name: String
-});
-
-var Schema = mongoose.Schema;
 
   /* GET home page. */
   router.get('/', function(req, res, next) {

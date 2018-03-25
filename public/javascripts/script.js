@@ -47,6 +47,52 @@ function getCookie(cname) {
 }
 
 $( document ).ready(function() {
+  
+  function sendLeadInfo(data) {
+    var urlParams = getUrlQueryParams();
+    adId = urlParams['id'];
+    $.ajax({
+      url: "/sendlead", 
+      data: {
+        "adId": adId,
+        "buyerName": data['buyerName'],
+        "buyerEmail": data['buyerEmail'],
+        "buyerPhone": data['buyerPhone'],
+        "buyerMessage": data['buyerMessage']
+      },
+      success: function(result){
+           
+        setTimeout(function() {
+          location.reload();
+          $this.button('reset');
+          $('#exampleModal').modal('hide');
+          $("#sendMessageLabel").text("Your message has been sent! Seller will contact you shortly.");
+        }, 2000);  
+      }});
+  };
+
+  $('#leadSubmit').on('click', function() {
+    $("#MissingLeadData").text("");
+    var $this = $(this);
+    data = [];
+    data['buyerName'] = $("#buyer-name").val();
+    data['buyerPhone'] = $("#buyer-phone").val();
+    data['buyerEmail'] = $("#buyer-email").val();
+    data['buyerMessage'] = $("#message-text").val();
+
+    if (
+      data['buyerName'] == '' ||
+      data['buyerPhone'] == '' ||
+      data['buyerEmail'] == '' ||
+      data['buyerMessage'] == ''
+   ) {
+     $("#MissingLeadData").text("All fields are required.");
+   } else {      
+      sendLeadInfo(data);
+      $this.button('loading');
+      
+    }
+  });
 
   var urlParams = getUrlQueryParams();
 

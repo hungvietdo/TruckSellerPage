@@ -10,6 +10,8 @@ mongoose.connect('mongodb://ec2-35-172-116-94.compute-1.amazonaws.com/test');
 var bears = require('./models/bear');
 var searchresult = require('./models/searchResult');
 var homepage = require('./routes/index');
+var detail = require('./models/detail');
+var sendlead = require('./models/sendlead');
 
 
 var app = express();
@@ -32,6 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', searchresult);
 app.use('/', bears);
 app.use('/', homepage);
+app.use('/', detail);
+app.use('/', sendlead);
 
 
 

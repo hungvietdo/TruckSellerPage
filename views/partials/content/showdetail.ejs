@@ -1,70 +1,97 @@
-    <!-- Search -->
-    
-    <br><br><br><br>
-    
 
-    <header>
-      
-        
+<br><br><br><br>
+<header>
+    <div class="container">
+        <div class="row">
+            
+                <div class="col-lg-2">
+                    Detail Info of Vehicle
+                </div>
+        <div>
 
+         <div class="row">  
 
+            <hr>
+            <div class="col-lg-12 ">
+                <div class="col-lg-4" >
+                    <b> Summary </b><br>    
+                    <b>Price:</b> <%= data['price'] %> <br>
+                    <b>Year:</b> <%= data['year'] %> <br>
+                    <b>Make:</b> <%= data['make'] %> <br>
+                    <b>Model:</b> <%= data['model'] %> <br>
+                    <b>Mileage:</b> <%= data['mileage'] %> <br>
+                    <b>Fuel Type:</b> <%= data['fuelType'] %> <br>
+                    <b>Brake Type:</b> <%= data['brakeType'] %> <br>
+                    <b>Category:</b> <%= data['category'] %> <br>
+                    <b>Engine Size:</b> <%= data['engineSize'] %> <br>
+                    <hr>
+                    <b>Seller:</b> <%= data['company'] %> <br>
+                    <b>City:</b> <%= data['city'] %> <br>
+                    <b>ZIP_CODE:</b> <%= data['zip'] %> <br>
+                    <b>STATE_CODE:</b> <%= data['state'] %> <br>
+                    <b>City:</b> <%= data['city'] %> <br>
+                    <b>Web:</b> <%= data['website'] %> <br>
 
-
-        <div class="container">
-            <div class="row">
-
-               <div class="col-lg-12 col-lg-offset-2">
-                          <h4>This is the detail of the <%= data[0].Model %> </h4>
-
-                            <br><br>
-                                
-                                <div class="col-lg-4" >
-                               
-                                <b> Summary </b><br>    
-
-                                Price: <%= data[0].Price %> <br>
-                                Year: <%= data[0].Year %> <br>
-                                Make: <%= data[0].Make %> <br>
-                                Model: <%= data[0].Model %> <br>
-                                Description: <%= data[0].Description %> <br>
-                                Seller: <%= data[0].sellerid.username %> <br>
-
-                                Fuel type: <%= data[0].Metadata['fuel type'] %> <br>
-                                Mileage: <%= data[0].Metadata['mileage'] %> <br>
-                                
-                                </div>
-
-                                <div class="col-lg-4" >
-
-                                <b> Metadata </b><br>    
-
-                                Color: <%= data[0].Metadata['color'] %> <br>
-                                Transmission: <%= data[0].Metadata['transmission'] %> <br>
-                                Body type: <%= data[0].Metadata['body type'] %> <br>
-                                Engine: <%= data[0].Metadata['Engine'] %> <br>
-
-
-                                </div>
-                                
-                                
-                                <% include showimage.ejs %>
-
-                                <br>
-                                <p>
-                                Click the link to:
-                                <a href="mailto:<%= data[0].sellerid.contact.email %>?Subject=Get more information about the <%= data[0].Model %>" target="_top">contact the Seller</a>
-                                <br>
-                                Phone number: <%= data[0].sellerid.contact.phone %>
-                                </p>
-                                
-
-                        
-                </div>      
-
-
-              
-            </div>
-        
+                </div>
+                <div class="col-lg-8" >
+                        <b>Description:</b> <%= data['description'] %> <br>
+                        <hr>
+                        <% include showimage.ejs %>
+                </div>
+            </div> 
+            <hr>
+            
         </div>
+        
+            <br>
+            <div class="col-lg-5" >
+                <div class="row">
+                
+                </div>
+            </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Contact Buyer</button>
+    <label id="sendMessageLabel"></label>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+          </div>
+          <div>
+          <div class="modal-body">
+            
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Your Name:</label>
+                    <input type="text" class="form-control" id="buyer-name" name="buyerName" required>
+                </div>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Your Email:</label>
+                <input type="text" class="form-control" id="buyer-email" name="buyerEmail">
+              </div>
+              <div class="form-group">
+                    <label for="recipient-name" class="control-label">Your Phone:</label>
+                    <input type="text" class="form-control" id="buyer-phone" name="buyerPhone">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="control-label">Message:</label>
+                <textarea class="form-control" id="message-text" name="buyerMessage"></textarea>
+              </div>          
+          </div>
+          <div class="modal-footer">
+                <label id="MissingLeadData"></label>
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" id="leadSubmit" class="btn btn-primary" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Send Message">Send Message</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
     <br><br><br><br><br><br><br>
-    </header>
+    <br><br><br><br><br><br><br>
+</header>

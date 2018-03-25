@@ -7,11 +7,10 @@ var mongoosePaginate = require('mongoose-paginate');
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 console.log("we are connected to mongo");
-var TruckSchema = mongoose.Schema({
+var VehicleSchema = mongoose.Schema({
     name: String
 });
-TruckSchema.plugin(mongoosePaginate);
-
+VehicleSchema.plugin(mongoosePaginate);
 
   /* GET to search result. */
   router.get('/results', function(req, res, next) {
@@ -24,13 +23,13 @@ TruckSchema.plugin(mongoosePaginate);
         rawdata: '',
       });
     } else {
-      var trucks = mongoose.model('vehicles', TruckSchema, 'vehicles');
+      var trucks = mongoose.model('searchresult', VehicleSchema, 'vehicles');
       var page = req.query.page;
 
-      trucks.paginate({"MEDIA": { $gt: [] }}, { page: page, limit: 10 }).then(function(result) {
+      trucks.paginate({"MEDIA": { $gt: [] }, $text: {$search: req.query.keyword}}, { page: page, limit: 10 }).then(function(result) {
         res.render('results', { 
           title: 'Truck Online - Result',
-          data: formatResult(result.docs),
+          searchdata: formatResult(result.docs),
           checkinput: true
         });
       });
@@ -42,12 +41,12 @@ function formatResult(data) {
 
   results = [];
   for (i = 0; i < data.length; i++) { 
-    results[i] =mappingData(data[i]);
+    results[i] =mappingSearchData(data[i]);
   }
   return results;
   
 }
-function mappingData(data) {
+function mappingSearchData(data) {
   var result = {};
   
   var map = {
