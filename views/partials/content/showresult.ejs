@@ -3,21 +3,20 @@
       <br><br><br><br>
         
         <div class="container">
-            <div class="row">
-
+            <div class="row">  
                 <% if (!checkinput) { %>
                       <div class="col-lg-8 col-lg-offset-2">
                           <h4>Please have a keyword.</h4>
                       </div>
                 <% } else { %> 
-
                       <% if (data.length==0) { %> 
-
                         <div class="col-lg-8 col-lg-offset-2">
                           <h4>No result.</h4>
                       </div>
-
                       <% } else { %> 
+                            <div align="center">
+                                <ul id="pagination-demo" class="pagination-sm"></ul>
+                            </div>
                             <% for(var i=0; i<data.length; i++) {
                                 undefined
                                 if (typeof data[i].thumbnail == 'undefined') {
@@ -34,9 +33,7 @@
                                         <a href="/results/<%= data[i]._id %>/">
                                           <img src=<%- thumbnail%> class="img-thumbnail " alt="Cinque Terre" width="150" height="100"> 
                                         </a>
-
                                       </div>
-
                                       <div class="col-lg-6">
                                           <h3><%- data[i].make%> <%- data[i].model%> </h3> 
                                           <p><b>ID:</b>  <%- data[i].adId%></p>
@@ -45,17 +42,11 @@
                                           
                                       </div>
                                 </div>
-                            
                           <% } %>
-
                       <% } %> 
-
                   <% } %> 
-              
             </div>
-            <ul id="pagination-demo" class="pagination-sm"></ul>
             
-            <br><br>
 
         </div>
         </div>

@@ -4,8 +4,6 @@ var mongoose = require('mongoose');
 var db = mongoose.connection;
 var _ = require('underscore');
 var mongoosePaginate = require('mongoose-paginate');
-
-
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 console.log("we are connected to mongo");
@@ -26,20 +24,16 @@ TruckSchema.plugin(mongoosePaginate);
         rawdata: '',
       });
     } else {
-      //query = '{ "MEDIA": { $exists: true, $not: {$size: 0} } }'
       var trucks = mongoose.model('vehicles', TruckSchema, 'vehicles');
+      var page = req.query.page;
 
-      trucks.paginate({"MEDIA": { $gt: [] }}, { page: 1, limit: 10 }).then(function(result) {
+      trucks.paginate({"MEDIA": { $gt: [] }}, { page: page, limit: 10 }).then(function(result) {
         res.render('results', { 
           title: 'Truck Online - Result',
           data: formatResult(result.docs),
           checkinput: true
         });
       });
-
-      // trucks.find({}).limit(20).exec(function(err, searchresults) {
-        
-      // });
     };
   });
 });

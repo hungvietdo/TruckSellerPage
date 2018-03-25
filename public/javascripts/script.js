@@ -15,24 +15,56 @@ $("#ex2").slider({
               //console.log($('#ex2').val());
 });
 
-function simpleTemplating(data) {
-  var html = '<ul>';
-  $.each(data, function(index, item){
-      html += '<li>'+ item +'</li>';
-  });
-  html += '</ul>';
-  return html;
+function getUrlQueryParams() {
+  var queryParameters = {}, queryString = location.search.substring(1),
+  re = /([^&=]+)=([^&]*)/g, m;
+  while (m = re.exec(queryString)) {
+    queryParameters[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+  }
+  return queryParameters;
+
+}
+
+function reloadpage(page) {
+  var urlParams = getUrlQueryParams();
+  urlParams['page'] = page;
+  location.search = $.param(urlParams);
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
 }
 
 $( document ).ready(function() {
+
+  var urlParams = getUrlQueryParams();
+
+  if (typeof urlParams['page'] == 'undefined') {
+    document.cookie = "page=1";
+  }
+
   $('#pagination-demo').twbsPagination({
     totalPages: 16,
     visiblePages: 6,
     next: 'Next',
     prev: 'Prev',
+    initiateStartPageClick:false,
+    startPage:parseInt(getCookie('page')),
     onPageClick: function (event, page) {
-        //fetch content and render here
-        $('#page-content').text('Page ' + page) + ' content here';
+      document.cookie = "page="+page;
+      reloadpage(page);
     }
-});
+  });
+  
 });
