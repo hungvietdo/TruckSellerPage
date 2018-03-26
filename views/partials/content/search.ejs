@@ -1,18 +1,29 @@
-    <!-- Search -->
+<form action="results" method="GET">
     <header>
         <div class="container">
             <div class="row">    
                 <div class="col-lg-6 col-lg-offset-3">
-                        <form action="results" method="GET">
+                        
                         <div class="input-group">
                             <input class="form-control input" id="mainsearch" type="text" name="keyword" placeholder="keyword">
                             <input  type="hidden" id="selectedtype" name="selectedtype">
                                 <span class="input-group-btn">
                                     <button id="checknow" type="submit" class="btn btn-success">Search <i class="icon-double-angle-right"></i></button>
                                 </span>
-                        </div>
-                        </form>
+                        </div>                   
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="container"></div>
+            <div class="row">
+                <div class="col-lg-12 col-lg-offset-4">
+                    <i class="fa fa-usd" aria-hidden="true"></i><b>0</b> <input id="dataslide" type="text" value="" data-slider-min="0" data-slider-max="400000" data-slider-step="1000" data-slider-value="[55000,200000]"/> <b> <i class="fa fa-usd" aria-hidden="true"></i>400,000</b>
+                    <input  type="hidden" id="minPrice" name="minPrice">
+                    <input  type="hidden" id="maxPrice" name="maxPrice">
+                    
                 </div>
             </div>
         </div>
     </header>
+</form>

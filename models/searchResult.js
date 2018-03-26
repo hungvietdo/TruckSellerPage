@@ -23,10 +23,22 @@ VehicleSchema.plugin(mongoosePaginate);
         rawdata: '',
       });
     } else {
+      console.log(req.query);
       var trucks = mongoose.model('searchresult', VehicleSchema, 'vehicles');
       var page = req.query.page;
+      var minPrice = parseInt(req.query.minPrice);
+      var maxPrice = parseInt(req.query.maxPrice);
+      if (isNaN(minPrice)) {
+        minPrice=-1;
+        maxPrice=1000000;
+      }
 
-      trucks.paginate({"MEDIA": { $gt: [] }, $text: {$search: req.query.keyword}}, { page: page, limit: 10 }).then(function(result) {
+      trucks.paginate({
+        "MEDIA": { $gt: [] },
+        $text: {$search: req.query.keyword},
+        $and: [{"PRICE":{$gt: minPrice-1}},{"PRICE":{$lt: maxPrice+1}}],
+      }, 
+      { page: page, limit: 10 }).then(function(result) {
         res.render('results', { 
           title: 'Truck Online - Result',
           searchdata: formatResult(result.docs),

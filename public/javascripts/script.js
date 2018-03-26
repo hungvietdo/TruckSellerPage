@@ -113,4 +113,10 @@ $( document ).ready(function() {
     }
   });
   
+  // With JQuery
+  $("#dataslide").slider();
+  $("#dataslide").on("slide", function(slideEvt) {
+      $("#minPrice").val(slideEvt.value[0]);
+      $("#maxPrice").val(slideEvt.value[1]);
+  });
 });
